@@ -17,14 +17,6 @@ void createLinkList(LinkList &lst)
 }
 
 
-
-struct Node{
-    int data;
-    struct Node *next;
-
-};
-
-
 Node* createNode(int x){
     Node* newnode = new Node;
     newnode->data = x;
@@ -60,8 +52,68 @@ void Input(LinkList &lst)
     printf("\nNhap so luong phan tu: ");
     scanf("%d",&n);
     for(int i=0; i<n; i++){
-        
+
     }
+}
+
+void DeleteAfter(Node *p)
+{
+    Node *q;
+    if(p == NULL || p->next == NULL)
+    {
+        printf("\nCant delete node");
+    }
+    else{
+        q = p->next;
+        p->next = q->next;
+        delete q;
+    }
+}
+
+void ClearList(Node *phead)
+{
+    Node *tmp;
+    while(phead != NULL)
+    {
+        tmp = phead;
+        phead = phead->next;
+        delete tmp;
+    }
+}
+
+Node* TimNode(Node *phead, int i)
+{
+    Node *p = phead;
+    int vitri = 0;
+    while(p != NULL && vitri < i)
+    {
+        p = p->next;
+        vitri++;
+    }
+
+    return p;
+}
+
+int Position(Node* phead, Node* p)
+{
+    int vitri = 0;
+    Node* tmp = phead;
+    while(tmp != NULL && tmp != p)
+    {
+        tmp = tmp->next;
+        vitri++;
+    }
+
+    if(tmp == NULL)
+        return -1;
+    return vitri;
+}
+
+
+Node* PreNode(Node* phead, Node* p)
+{
+    Node *q;
+    if()
 }
 
 int main()
