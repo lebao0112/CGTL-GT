@@ -8,7 +8,7 @@ struct Node{
 struct LinkList{
     Node *head;
     Node *tail;    
-}
+};
 
 void createLinkList(LinkList &lst)
 {
@@ -110,11 +110,11 @@ int Position(Node* phead, Node* p)
 }
 
 
-Node* PreNode(Node* phead, Node* p)
-{
-    Node *q;
-    if()
-}
+// Node* PreNode(Node* phead, Node* p)
+// {
+//     Node *q;
+//     if()
+// }
 
 int main()
 {
