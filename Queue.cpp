@@ -44,7 +44,7 @@ int Pop(Queue &Q)
         printf("The queue is empty, can not pop \n");
     }else{
         x = Q.Array[Q.front];
-        for(int i = Q.front; i <= Q.rear; i++)
+        for(int i = Q.front; i < Q.rear; i++)
             Q.Array[i] = Q.Array[i+1];
         Q.rear--;
         Q.count--;
@@ -64,5 +64,5 @@ int main(){
     Push(Q,3);
     Push(Q,3);
     ShowQueue(Q);
-    
+    //afafafaf
 }
