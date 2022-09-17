@@ -8,6 +8,7 @@ struct node
 };
 
 typedef node* NODE;
+typedef NODE TREE;
 
 NODE createNewnode(int data)
 {
@@ -17,6 +18,16 @@ NODE createNewnode(int data)
     newnode->node_left = NULL;
 
     return newnode;
+}
+
+void InitTree(TREE &root)
+{
+    root = NULL;
+}
+
+int isEmpty(TREE root)
+{
+    return (root == NULL);
 }
 
 void PreOrder(NODE root)
@@ -38,6 +49,8 @@ void InOrder(NODE root)
         InOrder(root->node_right);
     }
 }
+
+
 
 void PostOrder(NODE root)
 {
@@ -102,9 +115,52 @@ NODE Search(NODE root, int x)
     return p;
 }
 
+void AddNode(TREE &root, NODE newnode)
+{
+    if (root)
+    {
+        if (root->data == newnode->data) // Nếu bị trùng giá trị thì không thêm
+            return;
+        if (newnode->data < root->data) // Thêm vào cây con bên trái (nhỏ hơn nút hiện tại)
+            AddNode(root->node_left, newnode);
+        else
+            AddNode(root->node_right, newnode); // Thêm vào cây con bên phải (lớn hơn nút hiện tại)
+    }
+    else
+    {
+        root = newnode; // Đã tìm thấy vị trí thích hợp, thêm node vào
+    }
+}
+
+//Tim kiem 
+NODE FindNode(TREE root, int x)
+{
+    if(root){
+           if(root->data == x)
+                return root;
+            if(x < root->data)
+                return FindNode(root->node_left,x);
+            return FindNode(root->node_right,x);
+
+    }
+    return NULL; // khong tim thay
+}
+
 
 
 int main(){
+    TREE root;
+    InitTree(root);
+    NODE n1 = createNewnode(1);
+    NODE n2 = createNewnode(3);
+    NODE n3 = createNewnode(5);
+    NODE n4 = createNewnode(10);
+    AddNode(root,n1);
+    AddNode(root,n2);
+    AddNode(root,n3);
+    AddNode(root,n4);
+
+    PreOrder(root);
 
     return 0;
 }
