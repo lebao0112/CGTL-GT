@@ -61,19 +61,6 @@ void ConvertDecToBin(STACK &stk, int dec)
 	}
 }
 
-void ChuyenTrungToSangHauTo(STACK &stk, char bt[])
-{
-	int i=0;
-	int j=0
-	char output[MAX];
-	while(i < strlen(bt)){
-		if(bt[i] >= '0' and bt[i] <= '9' )\
-		{
-			output[j++] = bt[i];
-		}
-		
-	}
-}
 
 
 int main()

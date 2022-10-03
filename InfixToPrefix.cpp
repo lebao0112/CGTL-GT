@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+ #include<bits/stdc++.h>
 #include<string.h>
 #define MAX 100
 struct node{
@@ -66,7 +66,7 @@ void showStack(STACK stk)
 
 int isNum(char x)
 {
-	return (x < '9' && x > '0');
+	return (x <= '9' && x >= '0');
 }
 
 int douutien(char x)
@@ -80,14 +80,25 @@ int douutien(char x)
 
 	return 3;
 }
-void infixtoPostfix(char infix[])
+
+void reverseString(char infix[])
+{
+    for(int i=0, j=strlen(infix)-1 ; i<j; i++, j--)
+    {
+        char temp = infix[i];
+        infix[i] = infix[j];
+        infix[j] = temp;
+    }
+}
+void infixtoPrefix(char infix[])
 {
 	char postfix[MAX];
 	STACK stk;
 	char x, token;
 	int i = 0, j = 0;    // i-index of infix,j-index of postfix
 	InitStack(stk);
-	for (i = 0; infix[i] != ' '; i++)
+    reverseString(infix);
+	for (i = 0; infix[i] != '\0'; i++)
 	{
 		token = infix[i];
 		if (isNum(token))
@@ -96,6 +107,7 @@ void infixtoPostfix(char infix[])
 			if (token == '(')
 				Push(stk,token);
 			else
+			{
 				if (token == ')')
 				{
 					while (x != '(')
@@ -108,13 +120,19 @@ void infixtoPostfix(char infix[])
 	
 				else
 				{
-					while (douutien(token) <= douutien(stk->data) && isEmptyStack(stk)==0 )//xet do uu tien cua toan tu
+					while ( !isEmptyStack(stk) )//xet do uu tien cua toan tu
 					{
+						if(  douutien(token) <= douutien(stk->data))
+						{
 						x = Pop(stk);
 						postfix[j++] = x;
+						}
+						else 
+						 break;
 					}
 					Push(stk, token);
 				}
+			}
 	}
 
 	while (!isEmptyStack(stk))
@@ -123,8 +141,10 @@ void infixtoPostfix(char infix[])
 		postfix[j++] = x;
 	}
 
-	postfix[j] = ' ';
-	printf("%d",postfix);
+	postfix[j] = '\0';
+    reverseString(postfix);
+
+	printf("%s",postfix);
 }
 
 int main()
@@ -133,7 +153,7 @@ int main()
 	printf("\nNhap bieu thuc trung to: ");
 	gets(infix);
 	fflush(stdin);
-	infixtoPostfix(infix);
+    infixtoPrefix(infix);
 	
 	return 0;
 }
